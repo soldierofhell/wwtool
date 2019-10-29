@@ -83,6 +83,8 @@ def parse_args():
         choices=['train', 'val', 'test'])
     parser.add_argument(
         '--release_version', default='v1', type=str)
+    parser.add_argument(
+        '--data_dir', default='/home', type=str)
     args = parser.parse_args()
     return args
 
@@ -128,9 +130,9 @@ if __name__ == "__main__":
 
     for imageset in imagesets:
         
-        imgpath = '/media/jwwangchn/data/{}/{}/{}/images'.format(core_dataset, release_version, imageset)
-        annopath = '/media/jwwangchn/data/{}/{}/{}/annotations'.format(core_dataset, release_version, imageset)
-        save_path = '/media/jwwangchn/data/{}/{}/coco/annotations'.format(core_dataset, release_version)
+        imgpath = os.path.join(data_dir, '{}/{}/{}/images'.format(core_dataset, release_version, imageset))
+        annopath = os.path.join(data_dir, '{}/{}/{}/annotations'.format(core_dataset, release_version, imageset))
+        save_path = os.path.join(data_dir, '{}/{}/coco/annotations'.format(core_dataset, release_version))
 
         if not os.path.exists(save_path):
             os.makedirs(save_path)
